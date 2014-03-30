@@ -2,7 +2,7 @@
 #define SFMLSNAKE_SCENE_HPP
 
 #include <memory>
-#include <vector>
+#include <deque>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Time.hpp>
@@ -41,7 +41,7 @@ public:
 
 protected:
     // Use ptr to gameobjects in order to use inheritance.
-    std::vector<std::unique_ptr<GameObject>> gameObjects_;
+    std::deque<std::unique_ptr<GameObject>> gameObjects_;
 
     sf::RenderWindow& window_;
 

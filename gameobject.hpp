@@ -17,8 +17,9 @@
 class GameObject
 {
 public:
-    // Dtor, makes class abstract by defining outside of class
-    virtual ~GameObject() = 0;
+    // Virtual Dtor
+    virtual ~GameObject() {
+    }
 
     // draws the object in a given window
     virtual void draw(sf::RenderWindow& window) {
