@@ -22,12 +22,16 @@ public:
 
     virtual void handleInput() override;
 
+    virtual void draw() override;
+
 private:
 
     sf::Vector2u boardSize_;
     std::string  nameOfPlayer_;
     sf::Vector2u origin_;
     sf::Vector2u fieldSize_;
+    sf::View     screenView_;
+    sf::View     boardView_;
 };
 
 #endif // SFMLSNAKE_INGAMESCENE_HPP

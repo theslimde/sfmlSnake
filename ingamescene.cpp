@@ -1,5 +1,6 @@
 #include "ingamescene.hpp"
 
+#include "snake.hpp"
 
 InGameScene::InGameScene(std::uint8_t sizeX, std::uint8_t sizeY,
             std::string nameOfPlayer, sf::RenderWindow& window,
@@ -10,31 +11,32 @@ InGameScene::InGameScene(std::uint8_t sizeX, std::uint8_t sizeY,
     origin_(0,0),
     fieldSize_(0,0)
 {
-    // calculate the size of the view such that every field has the
-    // size of sizeOfField
-    const float borderSide          = 0.05;
-    const float borderBottom        = 0.05;
-    const float borderTop           = 0.1;
-    const std::uint32_t sizeOfField = 20;
+    // Setup a view of the size 1024x768 to display the information
+    // such as Player name, score etc.
+    const sf::Vector2u screenSize(1024, 768);
+    screenView_ = sf::View(sf::FloatRect(0, 0, screenSize.x, screenSize.y));
 
-    const std::uint32_t boardPixelX = sizeOfField * sizeX;
-    const std::uint32_t boardPixelY = sizeOfField * sizeY;
+    // Setup a view to display the board
+    const std::uint32_t fieldSize = 20;
+    const sf::Vector2u boardSize(sizeX * fieldSize, sizeY * fieldSize);
+    boardView_ = sf::View(sf::FloatRect(0, screenSize.y,
+                boardSize.x, boardSize.y));
 
-    const std::uint32_t offsetTop   = boardPixelY * borderTop;
-    const std::uint32_t offsetBot   = boardPixelY * borderBottom;
-    const std::uint32_t offsetSide  = boardPixelX * borderSide;
-
-
-    // Set the view such that the board begins at (0,0) and
-    // the borders around it are accounted for
-    sf::View view(sf::FloatRect(-offsetTop, -offsetSide,
-                sizeOfField * sizeX + offsetSide,
-                sizeOfField * sizeY + offsetBot));
-    window.setView();
+    // FIXME: Get make_unique to work!
+    gameObjects_.emplace_back(new Snake(boardSize_));
 }
 
 void InGameScene::update(sf::Time dt) {
 }
 
 void InGameScene::handleInput() {
+}
+
+void InGameScene::draw() {
+    window_.setView(screenView_);
+
+    window_.setView(boardView_);
+    for(auto& obj : gameObjects_) {
+        obj->draw(window_);
+    }
 }

@@ -1,14 +1,18 @@
 #include "game.hpp"
 
+#include <cassert>
 #include <iostream>
 
 #include <SFML/System/Clock.hpp>
 
-Game::Game() {
-
+Game::Game() :
+    window_(new sf::RenderWindow(sf::VideoMode(800,600), "Snake"))
+{
 }
 
 int Game::run() {
+
+    assert(scene_);
 
     const int RETURN_SUCCESS = 0;
     const int RETURN_ERROR = -1;
@@ -26,7 +30,9 @@ int Game::run() {
             clock.restart();
             scene_->update(time);
 
+            window_->clear(sf::Color::Black);
             scene_->draw();
+            window_->display();
         }
     } catch(std::exception& e) {
         std::cout << "Error " << e.what() << std::endl;

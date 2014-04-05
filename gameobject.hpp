@@ -4,8 +4,6 @@
 #include <string>
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Time.hpp>
 
 /*
@@ -22,12 +20,10 @@ public:
     }
 
     // draws the object in a given window
-    virtual void draw(sf::RenderWindow& window) {
-        window.draw(sprite_);
-    }
+    virtual void draw(sf::RenderWindow& window) = 0;
 
     // gets the name of the object
-    virtual std::string getName() const {
+    virtual const std::string getName() const {
         return name_;
     }
 
@@ -36,8 +32,6 @@ public:
 
 protected:
     std::string name_;
-    sf::Texture texture_;
-    sf::Sprite  sprite_;
 };
 
 #endif // SFMLSNAKE_GAMEOBJECT_HPP

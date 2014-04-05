@@ -26,6 +26,10 @@ public:
     // set a new scene. This also deletes the current scene
     void setScene(std::unique_ptr<Scene> scene);
 
+    sf::RenderWindow& getWindow() const {
+        return *window_;
+    }
+
 private:
 
 
@@ -34,6 +38,8 @@ private:
 
     // Is the game running?
     bool running_ = false;
+
+    std::unique_ptr<sf::RenderWindow> window_;
 };
 
 #endif // SFMLSNAKE_GAME_HPP

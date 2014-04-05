@@ -3,6 +3,9 @@
 
 #include <deque>
 
+#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 
@@ -26,6 +29,9 @@ private:
     sf::Time timeBetweenTics_;
     sf::Time timeUntilNextTic_;
     sf::Vector2u boardSize_;
+    sf::Vector2u origin_;
+    sf::CircleShape snakePiece_;
+    sf::CircleShape snakeHead_;
 };
 
 #endif // SFMLSNAKE_SNAKE_HPP
